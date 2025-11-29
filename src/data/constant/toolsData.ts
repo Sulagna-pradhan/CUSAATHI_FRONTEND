@@ -17,7 +17,6 @@ import {
   FileSpreadsheet,
   Presentation,
   Wifi,
-  Battery,
   Key, 
   Terminal, 
   Search
@@ -34,8 +33,8 @@ export const toolsCategories = [
     features: [
       { name: 'Merge PDF', icon: Merge },
       { name: 'Split PDF', icon: Split },
-      { name: 'Compress PDF', icon: FileJson },
-      { name: 'PDF to Word', icon: FileText },
+      { name: 'HTML to PDF', icon: FileJson },
+      { name: 'PDF Watermark', icon: FileText },
       { name: 'PDF to Image', icon: Image },
       { name: 'Image to PDF', icon: FileText },
     ]

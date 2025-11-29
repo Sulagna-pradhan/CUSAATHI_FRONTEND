@@ -62,7 +62,7 @@ const Navbar = () => {
             <div className="hidden md:block">
               <Link
                 to="/search"
-                className="p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors inline-block"
+                className="p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors flex items-center justify-center"
               >
                 <Search className="w-5 h-5" />
               </Link>
@@ -71,7 +71,7 @@ const Navbar = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors"
+              className="p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors flex items-center justify-center"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -80,6 +80,34 @@ const Navbar = () => {
                 <Moon className="w-5 h-5" />
               )}
             </button>
+
+            {/* Notifications */}
+            {isAuthenticated && (
+              <button className="relative p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+              </button>
+            )}
+
+            {/* User Menu / Auth Buttons */}
+            {isAuthenticated ? (
+              <Link to="/profile">
+                <Avatar
+                  name={user?.name}
+                  src={user?.avatar}
+                  size="sm"
+                  status="online"
+                />
+              </Link>
+            ) : (
+              <div className="hidden md:flex items-center gap-2">
+                <Link to="/register">
+                  <Button variant="primary" size="md" className="bg-emerald-600 hover:bg-emerald-700">
+                    Get Started
+                  </Button>
+                </Link>
+              </div>
+            )}
 
             {/* Mobile Menu Button */}
             <button
