@@ -11,7 +11,6 @@ export {
   Groups,
   Alumni,
   Placements,
-  ToolsHub,
   CollegeList,
   CollegeDetail,
   Calendar,
@@ -21,3 +20,4 @@ export {
 } from './PlaceholderPages';
 
 export { default as Search } from './Search';
+export { default as ToolsHub } from './tools/ToolsHub';

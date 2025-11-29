@@ -60,9 +60,6 @@ export const Alumni = () => <PlaceholderPage title="Alumni Network" description=
 // Career
 export const Placements = () => <PlaceholderPage title="Placements" description="Explore placement opportunities" />;
 
-// Tools
-export const ToolsHub = () => <PlaceholderPage title="Tools" description="Productivity tools and utilities" />;
-
 // Colleges
 export const CollegeList = () => <PlaceholderPage title="Colleges" description="Browse all affiliated colleges" />;
 export const CollegeDetail = () => <PlaceholderPage title="College Details" description="View college information" />;
