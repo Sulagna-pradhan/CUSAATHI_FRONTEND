@@ -296,7 +296,7 @@ const Home = () => {
             subtitle="Focused tools for tracking notices, planning revisions, and collaborating with your peers across CU."
           />
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
@@ -305,30 +305,25 @@ const Home = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.06 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Link to={feature.link} className="block h-full">
-                    <Card
-                      clickable
-                      hover
-                      className="h-full border border-emerald-100/70 bg-emerald-50/70 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 dark:border-emerald-900 dark:bg-emerald-950/40"
-                    >
-                      <Card.Body className="p-6 md:p-7">
-                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-lime-500 flex items-center justify-center mb-5 shadow-lg">
-                          <Icon className="w-6 h-6 text-white" />
+                    <Card clickable hover className="h-full border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-dark-bg dark:border-gray-800">
+                      <Card.Body className="p-8">
+                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 shadow-lg`}>
+                          <Icon className="w-7 h-7 text-white" />
                         </div>
-
-                        <h3 className="text-lg md:text-xl font-bold mb-2.5 text-gray-900 dark:text-white">
+                        
+                        <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
                           {feature.title}
                         </h3>
-
-                        <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                        
+                        <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                           {feature.description}
                         </p>
-
-                        <div className="flex items-center text-emerald-700 dark:text-emerald-300 font-semibold group text-sm">
-                          Explore feature
-                          <ArrowRight className="w-4 h-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" />
+                        
+                        <div className="flex items-center text-emerald-600 dark:text-emerald-400 font-semibold group">
+                          Explore Feature <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
                         </div>
                       </Card.Body>
                     </Card>

@@ -51,7 +51,7 @@ const Features = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Link to={feature.link} className="block h-full">
-                    <Card clickable hover className="h-full border-none shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-dark-bg">
+                    <Card clickable hover className="h-full border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-dark-bg dark:border-gray-800">
                       <Card.Body className="p-8">
                         <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 shadow-lg`}>
                           <Icon className="w-7 h-7 text-white" />
