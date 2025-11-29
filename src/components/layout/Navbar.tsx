@@ -81,33 +81,14 @@ const Navbar = () => {
               )}
             </button>
 
-            {/* Notifications */}
-            {isAuthenticated && (
-              <button className="relative p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-              </button>
-            )}
-
-            {/* User Menu / Auth Buttons */}
-            {isAuthenticated ? (
-              <Link to="/profile">
-                <Avatar
-                  name={user?.name}
-                  src={user?.avatar}
-                  size="sm"
-                  status="online"
-                />
+            {/* Auth Buttons */}
+            <div className="hidden md:flex items-center gap-2">
+              <Link to="/register">
+                <Button variant="primary" size="md" className="bg-emerald-600 hover:bg-emerald-700">
+                  Get Started
+                </Button>
               </Link>
-            ) : (
-              <div className="hidden md:flex items-center gap-2">
-                <Link to="/register">
-                  <Button variant="primary" size="md" className="bg-emerald-600 hover:bg-emerald-700">
-                    Get Started
-                  </Button>
-                </Link>
-              </div>
-            )}
+            </div>
 
             {/* Mobile Menu Button */}
             <button

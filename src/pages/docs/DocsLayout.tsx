@@ -12,7 +12,6 @@ const DocsLayout = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // DocsGuard will automatically redirect to login screen as user becomes null
     } catch (error) {
       console.error('Logout failed', error);
     }
