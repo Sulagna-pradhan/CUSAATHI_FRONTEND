@@ -17,13 +17,13 @@ const DocsStructure = () => {
           children: [
             { name: 'common', type: 'folder', desc: 'Reusable UI components (Button, Card, etc.)' },
             { name: 'layout', type: 'folder', desc: 'Layout components (Navbar, Footer, etc.)' },
-            { name: 'features', type: 'folder', desc: 'Feature-specific components' }
+            { name: 'providers', type: 'folder', desc: 'Context providers (Theme, etc.)' }
           ]
         },
         {
-          name: 'contexts',
+          name: 'config',
           type: 'folder',
-          desc: 'React Context providers (Auth, Theme).'
+          desc: 'Configuration files (Firebase, etc.)'
         },
         {
           name: 'data',
@@ -34,6 +34,11 @@ const DocsStructure = () => {
           name: 'hooks',
           type: 'folder',
           desc: 'Custom React hooks.'
+        },
+        {
+          name: 'lib',
+          type: 'folder',
+          desc: 'Library configurations and utilities.'
         },
         {
           name: 'pages',
