@@ -1,28 +1,27 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Bell, Sun, Moon, Search, GraduationCap } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme, useAuth } from '../../contexts';
-import { Button, Avatar } from '../common';
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Sun, Moon, Search, GraduationCap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "../../lib/contexts";
+import { Button } from "../common";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { theme, toggleTheme } = useTheme();
-  const { user, isAuthenticated } = useAuth();
   const location = useLocation();
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Notices', path: '/notices' },
-    { name: 'Resources', path: '/resources' },
-    { name: 'Community', path: '/community' },
-    { name: 'Career', path: '/career' },
-    { name: 'Tools', path: '/tools' },
+    { name: "Home", path: "/" },
+    { name: "Notices", path: "/notices" },
+    { name: "Resources", path: "/resources" },
+    { name: "Community", path: "/community" },
+    { name: "Career", path: "/career" },
+    { name: "Tools", path: "/tools" },
   ];
 
   const isActive = (path: string) => {
-    if (path === '/') return location.pathname === '/';
+    if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
 
@@ -48,8 +47,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`px-4 py-2 rounded-lg font-medium transition-all ${
                   isActive(link.path)
-                    ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10'
+                    ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10"
                 }`}
               >
                 {link.name}
@@ -75,40 +74,12 @@ const Navbar = () => {
               className="p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors"
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? (
+              {theme === "dark" ? (
                 <Sun className="w-5 h-5" />
               ) : (
                 <Moon className="w-5 h-5" />
               )}
             </button>
-
-            {/* Notifications */}
-            {isAuthenticated && (
-              <button className="relative p-2 text-gray-600 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-              </button>
-            )}
-
-            {/* User Menu / Auth Buttons */}
-            {isAuthenticated ? (
-              <Link to="/profile">
-                <Avatar
-                  name={user?.name}
-                  src={user?.avatar}
-                  size="sm"
-                  status="online"
-                />
-              </Link>
-            ) : (
-              <div className="hidden md:flex items-center gap-2">
-                <Link to="/register">
-                  <Button variant="primary" size="sm" className="bg-emerald-600 hover:bg-emerald-700">
-                    Get Started
-                  </Button>
-                </Link>
-              </div>
-            )}
 
             {/* Mobile Menu Button */}
             <button
@@ -130,7 +101,7 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
+            animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             className="lg:hidden border-t border-emerald-100 dark:border-emerald-900/60 overflow-hidden bg-white dark:bg-dark-card"
           >
@@ -138,7 +109,10 @@ const Navbar = () => {
               {/* Mobile Search */}
               <div className="md:hidden mb-4">
                 <Link to="/search">
-                  <Button variant="outline" className="w-full justify-start text-gray-500 font-normal border-emerald-200 dark:border-emerald-800">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start text-gray-500 font-normal border-emerald-200 dark:border-emerald-800"
+                  >
                     <Search className="w-4 h-4 mr-2" />
                     Search CUSAATHI...
                   </Button>
@@ -153,24 +127,13 @@ const Navbar = () => {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block px-4 py-3 rounded-lg font-medium transition-all ${
                     isActive(link.path)
-                      ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300'
-                      : 'text-gray-600 dark:text-gray-300 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10'
+                      ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10"
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
-
-              {/* Mobile Auth Buttons */}
-              {!isAuthenticated && (
-                <div className="flex gap-2 pt-4 border-t border-emerald-100 dark:border-emerald-900/60">
-                  <Link to="/register" className="flex-1">
-                    <Button variant="primary" size="md" className="w-full bg-emerald-600 hover:bg-emerald-700">
-                      Get Started
-                    </Button>
-                  </Link>
-                </div>
-              )}
             </div>
           </motion.div>
         )}
