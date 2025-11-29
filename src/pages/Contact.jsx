@@ -74,7 +74,7 @@ const Contact = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50 dark:from-dark-bg dark:via-dark-card dark:to-dark-bg py-20">
+      <section className="relative overflow-hidden bg-primary-600 dark:bg-primary-900 text-white py-20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -82,15 +82,15 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <Badge variant="primary" size="lg" className="mb-6">
+            <Badge variant="primary" size="lg" className="mb-6 bg-white/20 text-white border-white/30">
               Get in Touch
             </Badge>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               We're Here to Help
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-xl md:text-2xl text-primary-100 leading-relaxed">
               Have questions, feedback, or need assistance? Our team is ready to support you.
             </p>
           </motion.div>

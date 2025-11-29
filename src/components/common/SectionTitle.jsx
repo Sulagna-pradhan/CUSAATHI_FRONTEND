@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 
-const SectionTitle = ({ title, subtitle, align = 'center', className = '' }) => {
+const SectionTitle = ({ title, subtitle, align = 'center', center = false, className = '' }) => {
+  const alignment = center || align === 'center';
+  
   return (
-    <div className={`mb-12 ${align === 'center' ? 'text-center' : 'text-left'} ${className}`}>
+    <div className={`mb-12 ${alignment ? 'text-center' : 'text-left'} ${className}`}>
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -14,11 +16,11 @@ const SectionTitle = ({ title, subtitle, align = 'center', className = '' }) => 
       
       <motion.div 
         initial={{ opacity: 0, width: 0 }}
-        whileInView={{ opacity: 1, width: 96 }} // 96px = w-24
+        whileInView={{ opacity: 1, width: 96 }}
         viewport={{ once: true }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className={`h-1.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full mb-6 ${align === 'center' ? 'mx-auto' : ''}`}
-        style={{ width: '6rem' }} // Fallback/Force width handling via framer
+        className={`h-1 bg-primary-600 dark:bg-primary-500 rounded-full mb-6 ${alignment ? 'mx-auto' : ''}`}
+        style={{ width: '6rem' }}
       />
 
       {subtitle && (
@@ -27,7 +29,7 @@ const SectionTitle = ({ title, subtitle, align = 'center', className = '' }) => 
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className={`text-lg text-gray-600 dark:text-gray-400 max-w-2xl ${align === 'center' ? 'mx-auto' : ''}`}
+          className={`text-lg text-gray-600 dark:text-gray-400 max-w-2xl ${alignment ? 'mx-auto' : ''}`}
         >
           {subtitle}
         </motion.p>

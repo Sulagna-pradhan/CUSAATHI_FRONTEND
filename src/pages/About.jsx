@@ -59,7 +59,7 @@ const About = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50 dark:from-dark-bg dark:via-dark-card dark:to-dark-bg py-20">
+      <section className="relative overflow-hidden bg-primary-600 dark:bg-primary-900 text-white py-20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -67,16 +67,16 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <Badge variant="primary" size="lg" className="mb-6">
+            <Badge variant="primary" size="lg" className="mb-6 bg-white/20 text-white border-white/30">
               <Lightbulb className="w-4 h-4" />
               Our Mission
             </Badge>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Empowering CU Students, Together
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-16 leading-relaxed">
+            <p className="text-xl md:text-2xl text-primary-100 mb-16 leading-relaxed">
               Building a digital ecosystem for the University of Calcutta community
             </p>
           </motion.div>
@@ -90,12 +90,12 @@ const About = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card variant="glass" className="text-center">
+                <Card className="text-center bg-white/10 backdrop-blur-sm border-white/20">
                   <Card.Body className="py-6">
-                    <div className="text-3xl md:text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-primary-100">
                       {stat.label}
                     </div>
                   </Card.Body>

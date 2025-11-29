@@ -41,7 +41,8 @@ const ToolsHub = () => {
 
     return (
       <div>
-        <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50 dark:from-dark-bg dark:via-dark-card dark:to-dark-bg py-20">
+        {/* Hero Section */}
+        <section className="bg-white dark:bg-dark-bg border-b border-gray-200 dark:border-dark-border py-12">
           <div className="container-custom">
             <Link to="/tools" className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 mb-8 transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
@@ -54,7 +55,7 @@ const ToolsHub = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col md:flex-row items-start md:items-center gap-8"
             >
-              <div className={`p-6 rounded-3xl ${category.bg} shadow-lg`}>
+              <div className={`p-6 rounded-2xl ${category.bg} shadow-soft`}>
                 <Icon className={`w-16 h-16 ${category.color}`} />
               </div>
               <div>
@@ -70,7 +71,7 @@ const ToolsHub = () => {
         </section>
 
         {/* Features Grid */}
-        <section className="py-20 bg-white dark:bg-dark-bg">
+        <section className="py-20 bg-gray-50 dark:bg-dark-bg">
           <div className="container-custom">
             <motion.div 
               key={categoryId}
@@ -84,15 +85,15 @@ const ToolsHub = () => {
                 return (
                   <motion.div key={idx} variants={itemVariants}>
                     <Card 
-                      className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group border border-transparent hover:border-primary-100 dark:hover:border-primary-900"
+                      className="h-full hover:shadow-soft-lg transition-all duration-300 cursor-pointer group border-l-4"
+                      style={{ borderLeftColor: category.color.replace('text-', 'var(--tw-') }}
                       hover
                     >
-                      <Card.Body className="flex items-center gap-4 p-6 relative overflow-hidden">
-                        <div className={`absolute right-0 top-0 w-16 h-16 rounded-bl-full ${category.bg} opacity-10 group-hover:scale-150 transition-transform duration-500`} />
-                        <div className={`p-3 rounded-xl ${category.bg} group-hover:scale-110 transition-transform duration-300 relative z-10`}>
+                      <Card.Body className="flex items-center gap-4 p-6">
+                        <div className={`p-3 rounded-xl ${category.bg} group-hover:scale-110 transition-transform duration-300`}>
                           <FeatureIcon className={`w-6 h-6 ${category.color}`} />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors relative z-10">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                           {feature.name}
                         </h3>
                       </Card.Body>
@@ -111,7 +112,7 @@ const ToolsHub = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-accent-50 dark:from-dark-bg dark:via-dark-card dark:to-dark-bg py-20">
+      <section className="bg-primary-600 dark:bg-primary-900 text-white py-20">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -119,16 +120,16 @@ const ToolsHub = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <Badge variant="primary" size="lg" className="mb-6">
+            <Badge variant="primary" size="lg" className="mb-6 bg-white/20 text-white border-white/30">
               <Wrench className="w-4 h-4" />
               Productivity Suite
             </Badge>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Tools for Every Day Need
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-primary-100 mb-8 leading-relaxed">
               Enhance your academic workflow with our comprehensive collection of utilities and AI-powered tools.
             </p>
           </motion.div>
@@ -136,10 +137,10 @@ const ToolsHub = () => {
       </section>
 
       {/* Tools Grid */}
-      <section className="py-20 bg-white dark:bg-dark-bg">
+      <section className="py-20 bg-gray-50 dark:bg-dark-bg">
         <div className="container-custom">
           <motion.div 
-            key="hub-grid" // Force re-render when switching back to hub
+            key="hub-grid"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -153,15 +154,12 @@ const ToolsHub = () => {
               return (
                 <motion.div key={category.id} variants={itemVariants}>
                   <Card 
-                    className="h-full flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 group relative overflow-hidden"
+                    className="h-full flex flex-col shadow-soft hover:shadow-soft-xl transition-all duration-300 group border-t-4"
+                    style={{ borderTopColor: category.color.replace('text-', 'var(--tw-') }}
                     hover
                   >
-                    <div className={`h-1.5 w-full absolute top-0 left-0 bg-gradient-to-r ${category.color.replace('text-', 'from-').replace('500', '400')} to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300`} />
-                    <Card.Body className="p-8 flex-1 flex flex-col relative">
-                      {/* Decorative background circle */}
-                      <div className={`absolute -right-8 -top-8 w-32 h-32 rounded-full ${category.bg} opacity-20 group-hover:scale-150 transition-transform duration-500 ease-out`} />
-                      
-                      <div className={`w-14 h-14 rounded-2xl ${category.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10 shadow-sm`}>
+                    <Card.Body className="p-8 flex-1 flex flex-col">
+                      <div className={`w-14 h-14 rounded-2xl ${category.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-soft`}>
                         <Icon className={`w-7 h-7 ${category.color}`} />
                       </div>
                       
@@ -203,7 +201,7 @@ const ToolsHub = () => {
                           fullWidth 
                           icon={ArrowRight} 
                           iconPosition="right"
-                          className="group-hover:bg-primary-50 dark:group-hover:bg-primary-900/10 group-hover:border-primary-200 dark:group-hover:border-primary-800 transition-colors"
+                          className="group-hover:bg-primary-50 dark:group-hover:bg-primary-950 transition-colors"
                         >
                           Explore Tools
                         </Button>
