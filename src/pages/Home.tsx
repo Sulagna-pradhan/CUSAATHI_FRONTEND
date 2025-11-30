@@ -280,7 +280,7 @@ const Home = () => {
                 <img
                   src="/About us banner.svg"
                   alt="Students learning together"
-                  className="w-full object-cover aspect-video"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </motion.div>
@@ -344,9 +344,7 @@ const Home = () => {
           />
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Connecting line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-emerald-100 -translate-y-1/2 z-0 dark:bg-emerald-900/50" />
-
+           
             {[
               {
                 img: '/step 1.svg',
