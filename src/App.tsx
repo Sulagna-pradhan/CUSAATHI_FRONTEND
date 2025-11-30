@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { Navbar, Footer } from './components/layout';
-import { LoadingSpinner, DocsGuard } from './components/common';
+import { LoadingSpinner } from './components/common';
+import { AuthProvider } from './lib/contexts/AuthContext';
 
 import { 
   Login,
@@ -23,12 +24,15 @@ import {
   Search,
   Scholarships,
   AiChat,
-  DocsLayout,
-  DocsIntroduction,
-  DocsStructure,
-  DocsComponents,
-  DocsTheme,
-  DocsState
+  DevTeamLogin,
+  DevTeamRegister,
+  PendingApproval,
+  DevTeamLayout,
+  DevTeamDashboard,
+  TeamMembers,
+  SubDomains,
+  ActivityLog,
+  Tasks
 } from './pages';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -38,6 +42,13 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Features = lazy(() => import('./pages/Features'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Docs pages (lazy loaded)
+const DocsIntroduction = lazy(() => import('./pages/DevTeam/docs/DocsIntroduction'));
+const DocsStructure = lazy(() => import('./pages/DevTeam/docs/DocsStructure'));
+const DocsComponents = lazy(() => import('./pages/DevTeam/docs/DocsComponents'));
+const DocsTheme = lazy(() => import('./pages/DevTeam/docs/DocsTheme'));
+const DocsState = lazy(() => import('./pages/DevTeam/docs/DocsState'));
 
 
 // Loading fallback
@@ -49,10 +60,11 @@ const PageLoader = () => (
 
 function App() {
   return (
-    <BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
       <div className="min-h-screen flex flex-col bg-white dark:bg-dark-bg">
         <Navbar />
-        
+
         <main className="flex-1">
           <Suspense fallback={<PageLoader />}>
             <Routes>
@@ -108,17 +120,24 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               
-              {/* Documentation */}
-              <Route path="/docs" element={
-                <DocsGuard>
-                  <DocsLayout />
-                </DocsGuard>
-              }>
-                <Route index element={<DocsIntroduction />} />
-                <Route path="structure" element={<DocsStructure />} />
-                <Route path="components" element={<DocsComponents />} />
-                <Route path="theme" element={<DocsTheme />} />
-                <Route path="state" element={<DocsState />} />
+              {/* Dev Team Routes */}
+              <Route path="/dev-team/login" element={<DevTeamLogin />} />
+              <Route path="/dev-team/register" element={<DevTeamRegister />} />
+              <Route path="/dev-team/pending-approval" element={<PendingApproval />} />
+              <Route path="/dev-team" element={<DevTeamLayout />}>
+                <Route index element={<Navigate to="/dev-team/dashboard" replace />} />
+                <Route path="dashboard" element={<DevTeamDashboard />} />
+                <Route path="members" element={<TeamMembers />} />
+                <Route path="subdomains" element={<SubDomains />} />
+                <Route path="activity" element={<ActivityLog />} />
+                <Route path="tasks" element={<Tasks />} />
+                {/* Documentation under Dev Team */}
+                <Route path="docs" element={<Navigate to="/dev-team/docs/introduction" replace />} />
+                <Route path="docs/introduction" element={<DocsIntroduction />} />
+                <Route path="docs/structure" element={<DocsStructure />} />
+                <Route path="docs/components" element={<DocsComponents />} />
+                <Route path="docs/theme" element={<DocsTheme />} />
+                <Route path="docs/state" element={<DocsState />} />
               </Route>
 
               {/* 404 */}
@@ -130,7 +149,8 @@ function App() {
         <Footer />
 
       </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

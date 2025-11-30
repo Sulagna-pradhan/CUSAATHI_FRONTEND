@@ -8,4 +8,4 @@ export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as Modal } from './Modal';
 export { default as SearchBar } from './SearchBar';
 export { default as SectionTitle } from './SectionTitle';
-export { default as DocsGuard } from './DocsGuard';
+

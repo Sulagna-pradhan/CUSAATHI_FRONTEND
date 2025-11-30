@@ -1,6 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { Badge } from '../../components/common';
+import { Badge } from '../../../components/common';
 
 const DocsIntroduction = () => {
   return (

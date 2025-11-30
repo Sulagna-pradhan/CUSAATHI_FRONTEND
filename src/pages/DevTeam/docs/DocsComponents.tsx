@@ -12,7 +12,7 @@ import {
   LoadingSkeleton,
   Modal,
   SearchBar
-} from '../../components/common';
+} from '../../../components/common';
 import { Mail, Search, ArrowRight } from 'lucide-react';
 
 const DocsComponents = () => {

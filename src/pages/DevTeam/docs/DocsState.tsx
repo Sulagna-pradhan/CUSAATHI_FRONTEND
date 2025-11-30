@@ -1,6 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { SectionTitle } from '../../components/common';
+import { SectionTitle } from '../../../components/common';
 
 const DocsState = () => {
   return (

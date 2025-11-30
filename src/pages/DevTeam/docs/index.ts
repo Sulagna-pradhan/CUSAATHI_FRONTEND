@@ -1,4 +1,3 @@
-export { default as DocsLayout } from './DocsLayout';
 export { default as DocsIntroduction } from './DocsIntroduction';
 export { default as DocsStructure } from './DocsStructure';
 export { default as DocsComponents } from './DocsComponents';

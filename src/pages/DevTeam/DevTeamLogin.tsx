@@ -1,39 +1,33 @@
-import { useState, useEffect, ReactNode } from 'react';
-import { Lock, Mail } from 'lucide-react';
-import { Button, Input, Card, LoadingSpinner } from './index';
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
-import { 
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  User
-} from 'firebase/auth';
+import { Button, Input, Card, LoadingSpinner } from '../../components/common';
+import { Lock, Mail, ShieldCheck } from 'lucide-react';
 
-interface DocsGuardProps {
-  children: ReactNode;
-}
-
-const DocsGuard = ({ children }: DocsGuardProps) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+const DevTeamLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+    setLoading(true);
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      if (!user.emailVerified) {
+        await auth.signOut();
+        setError('Please verify your email address before logging in.');
+        return;
+      }
+
+      navigate('/dev-team/dashboard');
     } catch (err: any) {
       console.error(err);
       if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
@@ -43,33 +37,23 @@ const DocsGuard = ({ children }: DocsGuardProps) => {
       } else {
         setError('Authentication failed. Please try again.');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark-bg">
-        <LoadingSpinner size="lg" text="Verifying access..." />
-      </div>
-    );
-  }
-
-  if (user) {
-    return <>{children}</>;
-  }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-dark-bg p-4">
-      <Card className="w-full max-w-md p-8 shadow-xl border-t-4 border-t-emerald-500">
+      <Card className="w-full max-w-md p-8 shadow-xl border-t-4 border-t-blue-600">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Lock className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+          <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <ShieldCheck className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Developer Access
+            Dev Team Access
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Please sign in to access the documentation.
+            Secure area for team management.
           </p>
         </div>
 
@@ -83,18 +67,20 @@ const DocsGuard = ({ children }: DocsGuardProps) => {
           <Input
             label="Email"
             type="email"
-            placeholder="Enter your email"
+            placeholder="team@cusaathi.in"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             icon={Mail}
+            required
           />
           <Input
             label="Password"
             type="password"
-            placeholder="Enter your password"
+            placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             icon={Lock}
+            required
           />
           <div className="space-y-3 pt-2">
             <Button 
@@ -102,15 +88,25 @@ const DocsGuard = ({ children }: DocsGuardProps) => {
               variant="primary" 
               fullWidth 
               size="lg"
-              className="bg-emerald-600 hover:bg-emerald-700"
+              className="bg-blue-600 hover:bg-blue-700"
+              disabled={loading}
             >
-              Sign In
+              {loading ? <LoadingSpinner size="sm" text="Signing in..." /> : 'Sign In'}
             </Button>
           </div>
         </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Don't have an account?{' '}
+            <Link to="/dev-team/register" className="text-blue-600 hover:underline font-medium">
+              Join the Team
+            </Link>
+          </p>
+        </div>
       </Card>
     </div>
   );
 };
 
-export default DocsGuard;
+export default DevTeamLogin;
